@@ -45,18 +45,21 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+/*
 body {
-  background-image: url("/img/poker.jpg");
+  background-image: url('/img/poker.jpg');
   background-position: center;
   background-size: cover;
   min-height: 100vh;
-  min-width: 100vw; }
+  min-width: 100vw;
+}
 
 .body-wrap {
   background: rgba(255, 255, 255, 0.5);
   min-height: 100vh;
-  min-width: 100vw; }
-
+  min-width: 100vw;
+}
+*/
 /* ==========================================================================
    Media Queries
    ========================================================================== */

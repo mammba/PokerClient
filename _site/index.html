@@ -13,10 +13,75 @@
 
     <!-- <link rel="stylesheet" href="css/normalize.min.css"> -->
     
+
+    <!-- Chat demo -->
+    <style>
+      body {
+        padding:20px;
+      }
+      #console {
+        height: 400px;
+        overflow: auto;
+      }
+      .username-msg {color:orange;}
+      .connect-msg {color:green;}
+      .disconnect-msg {color:red;}
+      .send-msg {color:#888}
+    </style>
+
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 
 
     <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src="js/moment.min.js"></script>
+
+    <script>
+
+      var userName = 'user' + Math.floor((Math.random()*1000)+1);
+
+      var socket =  io.connect('http://pokertest.cloudapp.net');
+
+      socket.on('connect', function() {
+        output('<span class="connect-msg">Client has connected to the server!</span>');
+      });
+
+      socket.on('chatevent', function(data) {
+        output('<span class="username-msg">' + data.userName + ':</span> ' + data.message);
+      });
+
+      socket.on('disconnect', function() {
+        output('<span class="disconnect-msg">The client has disconnected!</span>');
+      });
+
+          function sendDisconnect() {
+              socket.disconnect();
+          }
+
+      function sendMessage() {
+              var message = $('#msg').val();
+              $('#msg').val('');
+
+              var jsonObject = {userName: userName,
+                        message: message};
+              socket.emit('chatevent', jsonObject);
+      }
+
+      function output(message) {
+              var currentTime = "<span class='time'>" +  moment().format('HH:mm:ss.SSS') + "</span>";
+              var element = $("<div>" + currentTime + " " + message + "</div>");
+        $('#console').prepend(element);
+      }
+
+      $(document).keydown(function(e){
+        if(e.keyCode == 13) {
+          $('#send').click();
+        }
+      });
+    </script>
 
     <!--[if lt IE 9]>
       <script src="js/vendor/html5-3.6-respond-1.4.2.min.js"></script>
@@ -30,8 +95,22 @@
     <div class="body-wrap">
       <div class="container">
         <!-- <p>Hello world! This is HTML5 Boilerplate.</p> -->
-      </div>
-    </div>
+        
+        <h1>Netty-socketio Demo Chat</h1>
+
+        <br/>
+
+        <div id="console" class="well">
+        </div>
+
+          <form class="well form-inline" onsubmit="return false;">
+             <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
+             <button type="button" onClick="sendMessage()" class="btn" id="send">Send</button>
+             <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
+          </form>
+
+            </div>
+          </div>
     
     <!--
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -43,8 +122,6 @@
     -->
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 
     <script>
       var socket = io('http://pokertest.cloudapp.net');
