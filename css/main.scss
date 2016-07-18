@@ -74,6 +74,46 @@ body {
 }
 */
 
+.body-wrap {
+  background: black;
+}
+
+.table {
+  width: 100%;
+  height: 300px;
+  background: green;
+}
+
+.players {
+  overflow: hidden;
+  height: 300px;
+}
+
+.player {
+  width: 100px;
+  height: 100px;
+  background: white;
+  margin: 20px;
+  float: left;
+}
+
+.user {
+  overflow: hidden;
+  height: 190px;
+}
+
+.user-avatar {
+  width: 150px;
+  height: 150px;
+  margin: 20px;
+  background: white;
+  float: right;
+}
+
+.chat {
+  background: white;
+  padding: 20px;
+}
 
 
 

@@ -48,7 +48,11 @@
       var socket =  io.connect('http://pokertest.cloudapp.net');
 
       socket.on('connect', function() {
-        output('<span class="connect-msg">Client has connected to the server!</span>');
+        output('<span class="connect-msg">Client has connected to the server!</span>'); 
+      });
+
+      socket.on('su', function(data) {
+        output('<span class="username-msg">' + data.data.dataType + ':</span> ' + data.data.overallStakes);
       });
 
       socket.on('chatevent', function(data) {
@@ -95,38 +99,42 @@
     <![endif]-->
     
     <div class="body-wrap">
-      <div class="container">
+      <div class="container-fluid">
         <!-- <p>Hello world! This is HTML5 Boilerplate.</p> -->
-        
-        <h1>Netty-socketio Demo Chat</h1>
-
-        <br/>
-
-        <div id="console" class="well">
+        <div class="col-xs-12 col-lg-9">
+          <div class="players">
+            <div class="player"></div>
+            <div class="player"></div>
+            <div class="croupier"></div>
+            <div class="player"></div>
+            <div class="player"></div>
+          </div>
+          <div class="table"></div>
+          <div class="user">
+            <div class="user-avatar"></div>
+          </div>
         </div>
 
-          <form class="well form-inline" onsubmit="return false;">
-             <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
-             <button type="button" onClick="sendMessage()" class="btn" id="send">Send</button>
-             <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
-          </form>
-
+        <div class="col-xs-12 col-lg-3">
+          <div class="chat">
+            <h1>Chat demo</h1>
+            <div id="console" class="well">
+            </div>
+              <form class="well form-inline" onsubmit="return false;">
+                 <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
+                 <button type="button" onClick="sendMessage()" class="btn" id="send">Send</button>
+                 <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
+              </form>
             </div>
           </div>
+        </div>
+      </div>
     
     <!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     -->
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
-
-    <script>
-      var socket = io('http://pokertest.cloudapp.net');
-      socket.on('news', function (data) {
-        console.log(data);
-        socket.emit('my other event', { my: 'data' });
-      });
-    </script>
 
     <!-- <script src="js/plugins.js"></script> -->
     
