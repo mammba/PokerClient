@@ -69,9 +69,9 @@
         output('<span class="disconnect-msg">The client has disconnected!</span>');
       });
 
-          function sendDisconnect() {
-              socket.disconnect();
-          }
+      function sendDisconnect() {
+          socket.disconnect();
+      }
 
       function sendMessage() {
               var message = $('#msg').val();
@@ -85,34 +85,46 @@
       var stake = 100;
 
       function sendCheck() {
-              var jsonObject = {action: "fold",
-                        stake: stake};
-              socket.emit('su', jsonObject);
+        var jsonObject = {
+          action: "fold",
+          stake: stake
+        };
+        socket.emit('su', jsonObject);
       }
 
       function sendCall() {
-              var jsonObject = {action: "call",
-                        stake: stake};
-              socket.emit('su', jsonObject);
+        var jsonObject = {
+          action: "call",
+          stake: stake};
+        socket.emit('su', jsonObject);
       }
 
       function sendBet() {
-              var jsonObject = {action: "bet",
-                        stake: stake};
-              socket.emit('su', jsonObject);
+        var jsonObject = {
+          action: "bet",
+          stake: stake};
+        socket.emit('su', jsonObject);
       }
 
       function sendRaise() {
-              var jsonObject = {action: "raise",
-                        stake: stake};
-              socket.emit('su', jsonObject);
+        var jsonObject = {
+          action: "raise",
+          stake: stake};
+        socket.emit('su', jsonObject);
       }
 
       function sendFold() {
-              var jsonObject = {action: "fold",
-                        stake: 0};
-              socket.emit('su', jsonObject);
+        var jsonObject = {
+          action: "fold",
+          stake: 0};
+          socket.emit('su', jsonObject);
       }
+
+      $('.check').click(sendCheck());
+      $('.call').click(sendCall());
+      $('.bet').click(sendBet());
+      $('.raise').click(sendRaise());
+      $('.fold').click(sendFold());
 
       function output(message) {
               var currentTime = "<span class='time'>" +  moment().format('HH:mm:ss.SSS') + "</span>";
