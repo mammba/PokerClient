@@ -74,50 +74,59 @@
       }
 
       function sendMessage() {
-              var message = $('#msg').val();
-              $('#msg').val('');
+        var message = $('#msg').val();
+        $('#msg').val('');
 
-              var jsonObject = {userName: userName,
-                        message: message};
-              socket.emit('chatevent', jsonObject);
+        var jsonObject = {
+          userName: userName,
+          message: message
+        };
+        socket.emit('chatevent', jsonObject);
       }
 
       var stake = 100;
 
       function sendCheck() {
-        var jsonObject = {
-          action: "fold",
-          stake: stake
+        var anAction = "fold";
+        var aStake = 100;
+        var aJsonObject = {
+          action: anAction,
+          stake: aStake
         };
-        socket.emit('su', jsonObject);
+        socket.emit('su', aJsonObject);
       }
 
       function sendCall() {
+        var stake = 100;
         var jsonObject = {
           action: "call",
-          stake: stake};
+          stake: stake
+        };
         socket.emit('su', jsonObject);
       }
 
       function sendBet() {
         var jsonObject = {
           action: "bet",
-          stake: stake};
+          stake: stake
+        };
         socket.emit('su', jsonObject);
       }
 
       function sendRaise() {
         var jsonObject = {
           action: "raise",
-          stake: stake};
+          stake: stake
+        };
         socket.emit('su', jsonObject);
       }
 
       function sendFold() {
         var jsonObject = {
           action: "fold",
-          stake: 0};
-          socket.emit('su', jsonObject);
+          stake: 0
+        };
+        socket.emit('su', jsonObject);
       }
 
       $('.check').click(sendCheck());
@@ -127,13 +136,13 @@
       $('.fold').click(sendFold());
 
       function output(message) {
-              var currentTime = "<span class='time'>" +  moment().format('HH:mm:ss.SSS') + "</span>";
-              var element = $("<div>" + currentTime + " " + message + "</div>");
+        var currentTime = "<span class='time'>" +  moment().format('HH:mm:ss.SSS') + "</span>";
+        var element = $("<div>" + currentTime + " " + message + "</div>");
         $('#console').prepend(element);
       }
 
       function logToConsole(message) {
-              console.log(message);
+        console.log(message);
       }
 
       $(document).keydown(function(e){
