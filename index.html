@@ -82,6 +82,38 @@
               socket.emit('chatevent', jsonObject);
       }
 
+      var stake = 100;
+
+      function sendCheck() {
+              var jsonObject = {action: "fold",
+                        stake: stake};
+              socket.emit('su', jsonObject);
+      }
+
+      function sendCall() {
+              var jsonObject = {action: "call",
+                        stake: stake};
+              socket.emit('su', jsonObject);
+      }
+
+      function sendBet() {
+              var jsonObject = {action: "bet",
+                        stake: stake};
+              socket.emit('su', jsonObject);
+      }
+
+      function sendRaise() {
+              var jsonObject = {action: "raise",
+                        stake: stake};
+              socket.emit('su', jsonObject);
+      }
+
+      function sendFold() {
+              var jsonObject = {action: "fold",
+                        stake: 0};
+              socket.emit('su', jsonObject);
+      }
+
       function output(message) {
               var currentTime = "<span class='time'>" +  moment().format('HH:mm:ss.SSS') + "</span>";
               var element = $("<div>" + currentTime + " " + message + "</div>");
@@ -129,6 +161,13 @@
           </div>
           <div class="table"></div>
           <div class="user">
+            <div class="buttons">
+              <button type="button" name="check" class="check" onClick="sendCheck()">Check</button>
+              <button type="button" name="call" class="call" onClick="sendCall()">Call</button>
+              <button type="button" name="bet" class="bet" onClick="sendBet()">Bet</button>
+              <button type="button" name="raise" class="raise" onClick="sendRaise()">Raise</button>
+              <button type="button" name="fold" class="check" onClick="sendFold()">Fold</button>
+            </div>
             <div class="user-avatar">
               <img src="http://placekitten.com/150/150"></div>
             </div>
