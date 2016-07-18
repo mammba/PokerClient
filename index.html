@@ -55,6 +55,12 @@
         output('<span class="username-msg">' + data.data.dataType + ':</span> ' + data.data.overallStakes);
       });
 
+      socket.on('su', function(data) {
+        logToConsole(data);
+        logToConsole(data.data);
+        logToConsole(data.data.dataType + data.data.overallStakes);
+      });
+
       socket.on('chatevent', function(data) {
         output('<span class="username-msg">' + data.userName + ':</span> ' + data.message);
       });
@@ -82,6 +88,10 @@
         $('#console').prepend(element);
       }
 
+      function logToConsole(message) {
+              console.log(message);
+      }
+
       $(document).keydown(function(e){
         if(e.keyCode == 13) {
           $('#send').click();
@@ -103,19 +113,29 @@
         <!-- <p>Hello world! This is HTML5 Boilerplate.</p> -->
         <div class="col-xs-12 col-lg-9">
           <div class="players">
-            <div class="player"></div>
-            <div class="player"></div>
-            <div class="croupier"></div>
-            <div class="player"></div>
-            <div class="player"></div>
+            <div class="player">
+              <img src="http://placekitten.com/100/100">
+            </div>
+            <div class="player">
+              <img src="http://placekitten.com/100/100">
+            </div>
+            <div class="player croupier"></div>
+            <div class="player">
+              <img src="http://placekitten.com/100/100">
+            </div>
+            <div class="player">
+              <img src="http://placekitten.com/100/100">
+            </div>
           </div>
           <div class="table"></div>
           <div class="user">
-            <div class="user-avatar"></div>
+            <div class="user-avatar">
+              <img src="http://placekitten.com/150/150"></div>
+            </div>
           </div>
         </div>
 
-        <div class="col-xs-12 col-lg-3">
+        <div class="col-xs-12 col-lg-3 hidden">
           <div class="chat">
             <h1>Chat demo</h1>
             <div id="console" class="well">
