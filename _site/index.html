@@ -115,8 +115,11 @@
         var anAction = "check";
         aStake = 0;
         var aJsonObject = {
-          action: anAction,
-          stake: aStake
+          action: "su",
+          data: {
+            action: anAction,
+            stake: aStake
+          }
         };
         socket.emit('su', aJsonObject);
         logSentToConsole(aJsonObject);
@@ -126,8 +129,11 @@
         var anAction = "call";
         aStake = aMinStake;
         var aJsonObject = {
-          action: anAction,
-          stake: aStake
+          action: "su",
+          data: {
+            action: anAction,
+            stake: aStake
+          }
         };
         socket.emit('su', aJsonObject);
         logSentToConsole(aJsonObject);
@@ -137,8 +143,11 @@
         var anAction = "bet";
         aStake = aMinStake * aMinCoeff;
         var aJsonObject = {
-          action: anAction,
-          stake: aStake
+          action: "su",
+          data: {
+            action: anAction,
+            stake: aStake
+          }
         };
         socket.emit('su', aJsonObject);
         logSentToConsole(aJsonObject);
@@ -147,8 +156,11 @@
       function sendRaise() {
         var anAction = "raise";
         var aJsonObject = {
-          action: anAction,
-          stake: aStake
+          action: "su",
+          data: {
+            action: anAction,
+            stake: aStake
+          }
         };
         socket.emit('su', aJsonObject);
         logSentToConsole(aJsonObject);
@@ -158,8 +170,11 @@
         var anAction = "fold";
         aStake = 0;
         var aJsonObject = {
-          action: anAction,
-          stake: aStake
+          action: "su",
+          data: {
+            action: anAction,
+            stake: aStake
+          }
         };
         socket.emit('su', aJsonObject);
         logSentToConsole(aJsonObject);
