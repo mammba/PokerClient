@@ -22,7 +22,7 @@
       .send-msg {color:#888}
     </style>
 
-
+    <link href="https://fonts.googleapis.com/css?family=Bitter:400,400i,700" rel="stylesheet">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
 
@@ -35,11 +35,9 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
     <script>
-
+      /*
       var userName = 'user' + Math.floor((Math.random()*1000)+1);
-
-      // var socket =  io.connect('http://pokertest.cloudapp.net');
-      var socket =  io.connect('ws://pokertest.cloudapp.net');
+      var socket =  io.connect('http://pokertest.cloudapp.net');
 
       socket.on('connect', function() {
         output('<span class="connect-msg">Client has connected to the server!</span>'); 
@@ -50,9 +48,7 @@
       });
 
       socket.on('su', function(data) {
-        logToConsole(data);
-        logToConsole(data.data);
-        logToConsole(data.data.dataType + data.data.overallStakes);
+        console.log(data);
       });
 
       socket.on('chatevent', function(data) {
@@ -78,65 +74,10 @@
         socket.emit('chatevent', jsonObject);
       }
 
-      var stake = 100;
-
-      function sendCheck() {
-        var anAction = "fold";
-        var aStake = 100;
-        var aJsonObject = {
-          action: anAction,
-          stake: aStake
-        };
-        socket.emit('su', aJsonObject);
-      }
-
-      function sendCall() {
-        var stake = 100;
-        var jsonObject = {
-          action: "call",
-          stake: stake
-        };
-        socket.emit('su', jsonObject);
-      }
-
-      function sendBet() {
-        var jsonObject = {
-          action: "bet",
-          stake: stake
-        };
-        socket.emit('su', jsonObject);
-      }
-
-      function sendRaise() {
-        var jsonObject = {
-          action: "raise",
-          stake: stake
-        };
-        socket.emit('su', jsonObject);
-      }
-
-      function sendFold() {
-        var jsonObject = {
-          action: "fold",
-          stake: 0
-        };
-        socket.emit('su', jsonObject);
-      }
-
-      $('.check').click(sendCheck());
-      $('.call').click(sendCall());
-      $('.bet').click(sendBet());
-      $('.raise').click(sendRaise());
-      $('.fold').click(sendFold());
-
       function output(message) {
         var currentTime = "<span class='time'>" +  moment().format('HH:mm:ss.SSS') + "</span>";
         var element = $("<div>" + currentTime + " " + message + "</div>");
         $('#console').prepend(element);
-      }
-
-      function logToConsole(message) {
-        console.log(message);
       }
 
       $(document).keydown(function(e){
@@ -144,6 +85,86 @@
           $('#send').click();
         }
       });
+      */
+
+      var socket =  io.connect('http://pokertest.cloudapp.net');
+
+      socket.on('connect', function() {
+        console.log('Connected'); 
+      });
+
+      socket.on('su', function(data) {
+        console.log("Received:");
+      });
+
+      socket.on('su', function(data) {
+        console.log(data);
+      });
+
+      var aStake = $('#user-stake').val();
+      var aMinStake = 100;
+      var aMinCoeff = 2;
+
+      function logSentToConsole(data) {
+        console.log("Sent:");
+        console.log(data);
+      }
+
+
+      function sendCheck() {
+        var anAction = "check";
+        aStake = 0;
+        var aJsonObject = {
+          action: anAction,
+          stake: aStake
+        };
+        socket.emit('su', aJsonObject);
+        logSentToConsole(aJsonObject);
+      }
+
+      function sendCall() {
+        var anAction = "call";
+        aStake = aMinStake;
+        var aJsonObject = {
+          action: anAction,
+          stake: aStake
+        };
+        socket.emit('su', aJsonObject);
+        logSentToConsole(aJsonObject);
+      }
+
+      function sendBet() {
+        var anAction = "bet";
+        aStake = aMinStake * aMinCoeff;
+        var aJsonObject = {
+          action: anAction,
+          stake: aStake
+        };
+        socket.emit('su', aJsonObject);
+        logSentToConsole(aJsonObject);
+      }
+
+      function sendRaise() {
+        var anAction = "raise";
+        var aJsonObject = {
+          action: anAction,
+          stake: aStake
+        };
+        socket.emit('su', aJsonObject);
+        logSentToConsole(aJsonObject);
+      }
+
+      function sendFold() {
+        var anAction = "fold";
+        aStake = 0;
+        var aJsonObject = {
+          action: anAction,
+          stake: aStake
+        };
+        socket.emit('su', aJsonObject);
+        logSentToConsole(aJsonObject);
+      }
+
     </script>
 
     <!--[if lt IE 9]>
@@ -157,86 +178,138 @@
     
     <div class="body-wrap">
       <div class="container-fluid">
-        
-        <div class="col-xs-12 col-lg-9">
+        <div class="row">
           
-          <div class="seats">
-            <div class="seat opponent">
-              <img src="http://placehold.it/200x200?text=Opponent">
+          <div class="col-xs-12 col-lg-9">
+            
+            <div class="seats">
+              <div class="seat opponent">
+                <div class="opponent-avatar">
+                  <img src="http://placehold.it/200x200?text=Opponent">
+                </div>
+                <div class="opponent-cards">
+                  <div class="opponent-card">
+                    <img src="/img/cards/base.png">
+                  </div>
+                  <div class="opponent-card">
+                    <img src="/img/cards/base.png">
+                  </div>
+                </div>
+                <div class="opponent-stake"></div>
+              </div>
+              <div class="seat opponent">
+                <div class="opponent-avatar">
+                  <img src="http://placehold.it/200x200?text=Opponent">
+                </div>
+                <div class="opponent-cards">
+                  <div class="opponent-card">
+                    <img src="/img/cards/base.png">
+                  </div>
+                  <div class="opponent-card">
+                    <img src="/img/cards/base.png">
+                  </div>
+                </div>
+                <div class="opponent-stake"></div>
+              </div>
+              <div class="seat croupier">
+                <div class="croupier-avatar">
+                  <img src="http://placehold.it/200x200?text=Croupier">
+                  <div class="croupier-cards">
+                    <div class="croupier-card">
+                      <img src="/img/cards/base.png">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="seat opponent">
+                <div class="opponent-avatar">
+                  <img src="http://placehold.it/200x200?text=Opponent">
+                </div>
+                <div class="opponent-cards">
+                  <div class="opponent-card">
+                    <img src="/img/cards/base.png">
+                  </div>
+                  <div class="opponent-card">
+                    <img src="/img/cards/base.png">
+                  </div>
+                </div>
+                <div class="opponent-stake"></div>
+              </div>
+              <div class="seat opponent">
+                <div class="opponent-avatar">
+                  <img src="http://placehold.it/200x200?text=Opponent">
+                </div>
+                <div class="opponent-cards">
+                  <div class="opponent-card">
+                    <img src="/img/cards/base.png">
+                  </div>
+                  <div class="opponent-card">
+                    <img src="/img/cards/base.png">
+                  </div>
+                </div>
+                <div class="opponent-stake"></div>
+              </div>
             </div>
-            <div class="seat opponent">
-              <img src="http://placehold.it/200x200?text=Opponent">
+            
+            <div class="poker-table row">
+              <div class="col-xs-10 col-xs-offset-1">
+                <div class="table-cards row">
+                  <div class="table-card col-xs-2">
+                    <img src="/img/cards/base.png">
+                  </div>
+                  <div class="table-card col-xs-2">
+                    <img src="/img/cards/base.png">
+                  </div>
+                  <div class="table-card col-xs-2">
+                    <img src="/img/cards/base.png">
+                  </div>
+                  <div class="table-card col-xs-2">
+                    <img src="/img/cards/base.png">
+                  </div>
+                  <div class="table-card col-xs-2">
+                    <img src="/img/cards/base.png">
+                  </div>
+                  <div class="table-card col-xs-2">
+                    <img src="/img/cards/base.png">
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="seat croupier">
-              <img src="http://placehold.it/200x200?text=Croupier">
-            </div>
-            <div class="seat opponent">
-              <img src="http://placehold.it/200x200?text=Opponent">
-            </div>
-            <div class="seat opponent">
-              <img src="http://placehold.it/200x200?text=Opponent">
+            
+            <div class="user">
+              <div class="row">
+                <div class="col-xs-6">
+                  <div class="avatar">
+                    <img src="http://placehold.it/200x200?text=User">
+                  </div>
+                </div>
+                <div class="col-xs-6">
+                  <form class="user-actions">
+                    <input type="number" class="form-control" id="user-stake" placeholder="Stake">
+                    <button type="button" name="check" class="btn btn-block btn-lg check" onClick="sendCheck()">Check</button>
+                    <button type="button" name="call" class="btn btn-block btn-lg call" onClick="sendCall()">Call</button>
+                    <button type="button" name="bet" class="btn btn-block btn-lg bet" onClick="sendBet()">Bet</button>
+                    <button type="button" name="raise" class="btn btn-block btn-lg raise" onClick="sendRaise()">Raise</button>
+                    <button type="button" name="fold" class="btn btn-block btn-lg check" onClick="sendFold()">Fold</button>
+                  </form> 
+                </div>
+              </div>
             </div>
           </div>
-          
-          <div class="poker-table">
-            <div class="table-cards">
-              <div class="table-card">
-                <img src="/img/cards/base.png">
-              </div>
-              <div class="table-card">
-                <img src="/img/cards/base.png">
-              </div>
-              <div class="table-card">
-                <img src="/img/cards/base.png">
-              </div>
-              <div class="table-card">
-                <img src="/img/cards/base.png">
-              </div>
-              <div class="table-card">
-                <img src="/img/cards/base.png">
-              </div>
-              <div class="table-card">
-                <img src="/img/cards/base.png">
-              </div>
-            </div>
-          </div>
-          
-          <div class="user">
-            <div class="row">
-              <div class="col-xs-6">
-                <div class="avatar">
-                  <img src="http://placehold.it/200x200?text=User">
-                </div>
-              </div>
-              <div class="user-actions">
-                <div class="col-xs-2">
-                  <button type="button" name="check" class="btn btn-block btn-lg check" onClick="sendCheck()">Check</button>
-                  <button type="button" name="call" class="btn btn-block btn-lg call" onClick="sendCall()">Call</button>
-                </div>
-                <div class="col-xs-2">
-                  <button type="button" name="bet" class="btn btn-block btn-lg bet" onClick="sendBet()">Bet</button>
-                  <button type="button" name="raise" class="btn btn-block btn-lg raise" onClick="sendRaise()">Raise</button>
-                </div>
-                <div class="col-xs-2">
-                  <button type="button" name="fold" class="btn btn-block btn-lg check" onClick="sendFold()">Fold</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-xs-12 col-lg-3">
-          <div class="chat">
-            <h1>Chat demo</h1>
-            <div class="console2" class="well"></div>
-            <form class="well form-inline" onsubmit="return false;">
-              <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
-              <button type="button" onClick="sendMessage()" class="btn" id="send">Send</button>
-              <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
-            </form>
+          <div class="col-xs-12 col-lg-3">
+            <div class="chat">
+              <h1>Chat demo</h1>
+              <div class="console" class="well"></div>
+              <form class="well form-inline" onsubmit="return false;">
+                <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
+                <button type="button" onClick="sendMessage()" class="btn" id="send">Send</button>
+                <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
+              </form>
+            </div>
           </div>
+        
         </div>
-      
       </div>
     </div>
     

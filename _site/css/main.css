@@ -60,8 +60,18 @@ body {
   min-width: 100vw;
 }
 */
+.console {
+  height: 250px; }
+
 body {
   background: black; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+.body-wrap {
+  font-family: 'Bitter', serif; }
 
 .seats {
   height: 20vh;
@@ -79,14 +89,15 @@ body {
 
 .poker-table {
   height: 60vh;
-  background: green;
-  overflow: hidden; }
+  background: green; }
 
 .table-cards {
-  float: left;
-  width: 100px; }
-  .table-cards img {
-    max-width: 100px; }
+  margin-top: 15vh;
+  height: 30vh; }
+
+.table-card img {
+  max-width: 100%;
+  height: auto; }
 
 .opponent {
   float: left; }
