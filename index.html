@@ -16,13 +16,6 @@
 
     <!-- Chat demo -->
     <style>
-      body {
-        padding:20px;
-      }
-      #console {
-        height: 400px;
-        overflow: auto;
-      }
       .username-msg {color:orange;}
       .connect-msg {color:green;}
       .disconnect-msg {color:red;}
@@ -45,7 +38,8 @@
 
       var userName = 'user' + Math.floor((Math.random()*1000)+1);
 
-      var socket =  io.connect('http://pokertest.cloudapp.net');
+      // var socket =  io.connect('http://pokertest.cloudapp.net');
+      var socket =  io.connect('ws://pokertest.cloudapp.net');
 
       socket.on('connect', function() {
         output('<span class="connect-msg">Client has connected to the server!</span>'); 
@@ -163,52 +157,88 @@
     
     <div class="body-wrap">
       <div class="container-fluid">
-        <!-- <p>Hello world! This is HTML5 Boilerplate.</p> -->
+        
         <div class="col-xs-12 col-lg-9">
-          <div class="players">
-            <div class="player">
-              <img src="http://placekitten.com/100/100">
+          
+          <div class="seats">
+            <div class="seat opponent">
+              <img src="http://placehold.it/200x200?text=Opponent">
             </div>
-            <div class="player">
-              <img src="http://placekitten.com/100/100">
+            <div class="seat opponent">
+              <img src="http://placehold.it/200x200?text=Opponent">
             </div>
-            <div class="player croupier"></div>
-            <div class="player">
-              <img src="http://placekitten.com/100/100">
+            <div class="seat croupier">
+              <img src="http://placehold.it/200x200?text=Croupier">
             </div>
-            <div class="player">
-              <img src="http://placekitten.com/100/100">
+            <div class="seat opponent">
+              <img src="http://placehold.it/200x200?text=Opponent">
+            </div>
+            <div class="seat opponent">
+              <img src="http://placehold.it/200x200?text=Opponent">
             </div>
           </div>
-          <div class="table"></div>
-          <div class="user">
-            <div class="buttons">
-              <button type="button" name="check" class="check" onClick="sendCheck()">Check</button>
-              <button type="button" name="call" class="call" onClick="sendCall()">Call</button>
-              <button type="button" name="bet" class="bet" onClick="sendBet()">Bet</button>
-              <button type="button" name="raise" class="raise" onClick="sendRaise()">Raise</button>
-              <button type="button" name="fold" class="check" onClick="sendFold()">Fold</button>
+          
+          <div class="poker-table">
+            <div class="table-cards">
+              <div class="table-card">
+                <img src="/img/cards/base.png">
+              </div>
+              <div class="table-card">
+                <img src="/img/cards/base.png">
+              </div>
+              <div class="table-card">
+                <img src="/img/cards/base.png">
+              </div>
+              <div class="table-card">
+                <img src="/img/cards/base.png">
+              </div>
+              <div class="table-card">
+                <img src="/img/cards/base.png">
+              </div>
+              <div class="table-card">
+                <img src="/img/cards/base.png">
+              </div>
             </div>
-            <div class="user-avatar">
-              <img src="http://placekitten.com/150/150"></div>
+          </div>
+          
+          <div class="user">
+            <div class="row">
+              <div class="col-xs-6">
+                <div class="avatar">
+                  <img src="http://placehold.it/200x200?text=User">
+                </div>
+              </div>
+              <div class="user-actions">
+                <div class="col-xs-2">
+                  <button type="button" name="check" class="btn btn-block btn-lg check" onClick="sendCheck()">Check</button>
+                  <button type="button" name="call" class="btn btn-block btn-lg call" onClick="sendCall()">Call</button>
+                </div>
+                <div class="col-xs-2">
+                  <button type="button" name="bet" class="btn btn-block btn-lg bet" onClick="sendBet()">Bet</button>
+                  <button type="button" name="raise" class="btn btn-block btn-lg raise" onClick="sendRaise()">Raise</button>
+                </div>
+                <div class="col-xs-2">
+                  <button type="button" name="fold" class="btn btn-block btn-lg check" onClick="sendFold()">Fold</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="col-xs-12 col-lg-3 hidden">
+        <div class="col-xs-12 col-lg-3">
           <div class="chat">
             <h1>Chat demo</h1>
-            <div id="console" class="well">
-            </div>
-              <form class="well form-inline" onsubmit="return false;">
-                 <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
-                 <button type="button" onClick="sendMessage()" class="btn" id="send">Send</button>
-                 <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
-              </form>
-            </div>
+            <div class="console2" class="well"></div>
+            <form class="well form-inline" onsubmit="return false;">
+              <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
+              <button type="button" onClick="sendMessage()" class="btn" id="send">Send</button>
+              <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
+            </form>
           </div>
         </div>
+      
       </div>
+    </div>
     
     <!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
