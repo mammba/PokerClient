@@ -26,7 +26,7 @@ $( document ).ready(function() {
 	socket.on('connect', function() {
 		console.log('Connected'); 
 	});
-	
+
 	function addOpponent(index, opponent, tableCards) {
 		// New player connected
 		if (index >= opponents.length) {
@@ -119,6 +119,25 @@ $( document ).ready(function() {
 					}
 				}
 			}
+		}
+		// Buttons
+		var actionList = data.data.actionList;
+		$("#call").addClass("disabled").prop("disabled", true);
+		$("#raise").addClass("disabled").prop("disabled", true);
+		$("#bet").addClass("disabled").prop("disabled", true);
+		$("#fold").addClass("disabled").prop("disabled", true)
+		$("#check").addClass("disabled").prop("disabled", true);
+		for (var i = 0; i < actionList.length; i++) {
+			if (actionList[i] == "call")
+				$("#call").removeClass("disabled").prop("disabled", false);
+			else if(actionList[i] == "fold")
+				$("#fold").addClass("disabled").prop("disabled", false);
+			else if (actionList[i] == "pass")
+				$("#check").addClass("disabled").prop("disabled", false);
+			else if (actionList[i] == "raise")
+				$("#call").addClass("disabled").prop("disabled", false);
+			else if (actionList[i] == "bet")
+				$("#bet").addClass("disabled").prop("disabled", false);
 		}
 	}
 	
