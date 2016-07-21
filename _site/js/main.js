@@ -57,7 +57,7 @@ $( document ).ready(function() {
 			var croupierHtml = 
 			'<div class="seat croupier">\
 				<div class="croupier-avatar">\
-					<img src="http://placehold.it/200x200?text=Croupier">\
+					<img src="http://www.avatarpro.biz/avatar/BestCroupierEverPleaseBe?s=500">\
 				</div>\
 				<div class="croupier-cards row">\
 					<div class="croupier-card col-xs-6 col-xs-offset-3">\
