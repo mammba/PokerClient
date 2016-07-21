@@ -37,6 +37,7 @@ $( document ).ready(function() {
 					<div class="col-xs-6">\
 						<div class="opponent-avatar">\
 							<img src="http://placehold.it/200x200?text=Opponent">\
+							<img src="http://www.avatarpro.biz/avatar/'+opponent.name+'?s=250">\
 						</div>\
 					</div>\
 					<div class="col-xs-6 opponent-info">\
