@@ -94,43 +94,53 @@ img {
 
 .seats {
   height: 30vh;
+  padding: 1.5vh;
   overflow: hidden;
 }
   .seat {
+    // padding: 1.5vh 0;
     width: 20%;
     float: left;
+
+    > div {
+      padding: 0 2vh;
+    }
   }
 
     .opponent-avatar,
     .croupier-avatar {
-      text-align: center;
-      padding: 1vh;
+      text-align: right;
+      padding: 1.5vh 0;
 
       img {
-        display: block;
         height: 8vh;
         width: 8vh;
         margin-left: auto;
         margin-right: auto;
       }
-    } 
+    }
 
-    .opponent-cards,
-    .croupier-cards {
-      width: 90%;
-      margin-left: auto;
-      margin-right: auto;
+    .opponent-card:first-child {
+      text-align: right;
+    }
+
+    .opponent-card:last-child {
+      text-align: left;
+    }
+
+    .opponent-info {
+      text-align: left;
+      padding: 1.5vh 0;
+    }
+
+    .opponent-card,
+    .croupier-card {
       padding: 1vh;
 
       img { 
         height: 14vh;
         width: 10vh;
       }
-    }
-
-    .opponent-card,
-    .croupier-card {
-      text-align: center;
     }
 
 .poker-table {
@@ -141,8 +151,8 @@ img {
 }
 
   .table-cards {
-    margin-top: 12.5vh;
-    height: 25vh;
+    margin-top: 11vh;
+    height: 14vh;
   }
 
     .table-card {
@@ -157,14 +167,11 @@ img {
   float: left;
 }
 
-.opponent-state, .opponent-stake, .opponent-nickname {
-	text-align:center;
-	color:white;
-}
-
 .user {
   overflow: hidden;
   height: 30vh;
+  padding: 1.5vh;
+
 
   .fold {
     margin-top: 5px;
