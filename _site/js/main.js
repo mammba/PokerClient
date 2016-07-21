@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+	
 	var socket =  io.connect('http://pokertest.cloudapp.net');
 
 	socket.on('connect', function() {
