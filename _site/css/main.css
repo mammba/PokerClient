@@ -90,6 +90,11 @@ img {
     text-align: center; }
   .seat img {
     max-height: 10vh; }
+    
+.opponent-state, .opponent-stake, .opponent-nickname {
+	text-align:center;
+	color:white;
+}
 
 .opponent-cards,
 .croupier-cards {
