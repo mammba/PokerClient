@@ -45,13 +45,19 @@ $(document).ready(function() {
 			opponents[index] = opponent;
 			var opponentHtml = 
 			'<div class="seat opponent">\
-				<div class="opponent-avatar">\
-					<img src="http://placehold.it/200x200?text=Opponent">\
+				<div class="row">\
+					<div class="col-xs-6">\
+						<div class="opponent-avatar">\
+							<img src="http://placehold.it/200x200?text=Opponent">\
+						</div>\
+					</div>\
+					<div class="col-xs-6 opponent-info">\
+						<div class="opponent-nickname" id="opponent-'+index+'-nickname">'+opponent.name+'</div>\
+						<div class="opponent-stake" id="opponent-'+index+'-stake">'+opponent.stake+'</div>\
+						<div class="opponent-state" id="opponent-'+index+'-state">'+((opponent.state == "waitForMove")?"Thinking...":"")+'</div>\
+					</div>\
 				</div>\
-				<div class="opponent-nickname" id="opponent-'+index+'-nickname">'+opponent.name+'</div>\
-				<div class="opponent-state" id="opponent-'+index+'-state">'+((opponent.state == "waitForMove")?"Thinking...":"")+'</div>\
-				<div class="opponent-stake" id="opponent-'+index+'-stake">'+opponent.stake+'</div>\
-				<div class="opponent-cards row">\
+				<div class="row opponent-cards">\
 					<div class="opponent-card col-xs-6">\
 						<img src="/img/cards/base.png" id="opponent-'+index+'-card-1">\
 					</div>\

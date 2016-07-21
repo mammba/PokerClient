@@ -76,45 +76,43 @@ img {
 
 .seats {
   height: 30vh;
+  padding: 1.5vh;
   overflow: hidden; }
 
 .seat {
   width: 20%;
   float: left; }
+  .seat > div {
+    padding: 0 2vh; }
 
 .opponent-avatar,
 .croupier-avatar {
-  text-align: center;
-  padding: 1vh; }
+  text-align: right;
+  padding: 1.5vh 0; }
   .opponent-avatar img,
   .croupier-avatar img {
-    display: block;
     height: 8vh;
     width: 8vh;
     margin-left: auto;
     margin-right: auto; }
-  .seat img {
-    max-height: 10vh; }
-    
-.opponent-state, .opponent-stake, .opponent-nickname {
-	text-align:center;
-	color:white;
-}
 
-.opponent-cards,
-.croupier-cards {
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1vh; }
-  .opponent-cards img,
-  .croupier-cards img {
-    height: 14vh;
-    width: 10vh; }
+.opponent-card:first-child {
+  text-align: right; }
+
+.opponent-card:last-child {
+  text-align: left; }
+
+.opponent-info {
+  text-align: left;
+  padding: 1.5vh 0; }
 
 .opponent-card,
 .croupier-card {
-  text-align: center; }
+  padding: 1vh; }
+  .opponent-card img,
+  .croupier-card img {
+    height: 14vh;
+    width: 10vh; }
 
 .poker-table {
   height: 40vh;
@@ -123,8 +121,8 @@ img {
   border-radius: 20vh; }
 
 .table-cards {
-  margin-top: 12.5vh;
-  height: 25vh; }
+  margin-top: 11vh;
+  height: 14vh; }
 
 .table-card img {
   height: 14vh;
@@ -135,7 +133,8 @@ img {
 
 .user {
   overflow: hidden;
-  height: 30vh; }
+  height: 30vh;
+  padding: 1.5vh; }
   .user .fold {
     margin-top: 5px; }
 
