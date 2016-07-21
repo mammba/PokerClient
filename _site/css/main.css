@@ -64,7 +64,8 @@ body {
   height: 250px; }
 
 body {
-  background: black; }
+  background: #333;
+  color: #fff; }
 
 img {
   max-width: 100%;
@@ -74,60 +75,72 @@ img {
   font-family: 'Bitter', serif; }
 
 .seats {
-  height: 25vh;
+  height: 30vh;
   overflow: hidden; }
 
 .seat {
   width: 20%;
   float: left; }
-  .seat .opponent-avatar,
-  .seat .croupier-avatar {
+
+.opponent-avatar,
+.croupier-avatar {
+  text-align: center;
+  padding: 1vh; }
+  .opponent-avatar img,
+  .croupier-avatar img {
     display: block;
-    max-height: 10vh;
-    width: 80%;
+    height: 8vh;
+    width: 8vh;
     margin-left: auto;
-    margin-right: auto;
-    text-align: center; }
-  .seat img {
-    max-height: 10vh; }
+    margin-right: auto; }
 
 .opponent-cards,
 .croupier-cards {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  max-height: 15vh; }
+  padding: 1vh; }
+  .opponent-cards img,
+  .croupier-cards img {
+    height: 14vh;
+    width: 10vh; }
+
+.opponent-card,
+.croupier-card {
+  text-align: center; }
 
 .poker-table {
-  height: 50vh;
-  background: green; }
+  height: 40vh;
+  background: green;
+  border: 2vh solid brown;
+  border-radius: 20vh; }
 
 .table-cards {
   margin-top: 12.5vh;
   height: 25vh; }
 
 .table-card img {
-  max-width: 100%;
-  height: auto; }
+  height: 14vh;
+  width: 10vh; }
 
 .opponent {
   float: left; }
 
 .user {
   overflow: hidden;
-  height: 25vh; }
+  height: 30vh; }
   .user .fold {
     margin-top: 5px; }
 
-.avatar {
-  float: left; }
-  .avatar img {
-    max-width: 100%;
-    max-height: 100%; }
+.user-avatar img {
+  max-width: 100%;
+  max-height: 100%; }
 
 .chat {
   height: 50vh;
-  background: white; }
+  background: #fff;
+  color: #333;
+  margin: 1vh; }
 
 /* ==========================================================================
    Media Queries

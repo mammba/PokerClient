@@ -28,6 +28,7 @@ $( document ).ready(function() {
 		console.log(data);
 		var tableCards = data.data.tableCards;
 		if (tableCards != null) {
+
 			for(var i = 0; i < tableCards.length; i++) {
 				var imgPath = "img/cards/"+tableCards[i].notation+".png";
 				var cardId = '#table-card'+(i+1);
@@ -115,6 +116,7 @@ $( document ).ready(function() {
 		socket.emit('su', aJsonObject);
 		logSentToConsole(aJsonObject);
 	}
+	
 	$('#check').click(function () {
 		sendCheck();
 	});
@@ -136,4 +138,5 @@ $( document ).ready(function() {
 	$('#send').click(function() {
 		sendMessage();
 	});
+
 });

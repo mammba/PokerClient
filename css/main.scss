@@ -79,7 +79,8 @@ body {
 }
 
 body {
-  background: black;
+  background: #333;
+  color: #fff;
 }
 
 img {
@@ -92,25 +93,25 @@ img {
 }
 
 .seats {
-  height: 25vh;
+  height: 30vh;
   overflow: hidden;
 }
   .seat {
     width: 20%;
     float: left;
+  }
 
     .opponent-avatar,
     .croupier-avatar {
-      display: block;
-      max-height: 10vh;
-      width: 80%;
-      margin-left: auto;
-      margin-right: auto;
       text-align: center;
-    }
+      padding: 1vh;
 
-      img { 
-        max-height: 10vh;
+      img {
+        display: block;
+        height: 8vh;
+        width: 8vh;
+        margin-left: auto;
+        margin-right: auto;
       }
     } 
 
@@ -119,12 +120,24 @@ img {
       width: 90%;
       margin-left: auto;
       margin-right: auto;
-      max-height: 15vh;
+      padding: 1vh;
+
+      img { 
+        height: 14vh;
+        width: 10vh;
+      }
+    }
+
+    .opponent-card,
+    .croupier-card {
+      text-align: center;
     }
 
 .poker-table {
-  height: 50vh;
+  height: 40vh;
   background: green;
+  border: 2vh solid brown;
+  border-radius: 20vh;
 }
 
   .table-cards {
@@ -135,8 +148,8 @@ img {
     .table-card {
       
       img {
-        max-width: 100%;
-        height: auto;
+        height: 14vh;
+        width: 10vh;
       }
     }
 
@@ -146,15 +159,14 @@ img {
 
 .user {
   overflow: hidden;
-  height: 25vh;
+  height: 30vh;
 
   .fold {
     margin-top: 5px;
   }
 }
 
-  .avatar {
-    float: left;
+  .user-avatar {
 
     img {
       max-width: 100%;
@@ -164,7 +176,9 @@ img {
 
 .chat {
   height: 50vh;
-  background: white;
+  background: #fff;
+  color: #333;
+  margin: 1vh;
 }
 
 
