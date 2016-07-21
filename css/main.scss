@@ -144,6 +144,11 @@ img {
   float: left;
 }
 
+.opponent-state, .opponent-stake, .opponent-nickname {
+	text-align:center;
+	color:white;
+}
+
 .user {
   overflow: hidden;
   height: 25vh;
