@@ -92,30 +92,44 @@ img {
 }
 
 .seats {
-  height: 20vh;
+  height: 25vh;
   overflow: hidden;
 }
   .seat {
     width: 20%;
     float: left;
 
-    img {
+    .opponent-avatar,
+    .croupier-avatar {
       display: block;
-      max-width: 100%;
-      max-height: 100%;
+      max-height: 10vh;
+      width: 80%;
       margin-left: auto;
       margin-right: auto;
+      text-align: center;
     }
-  }
+
+      img { 
+        max-height: 10vh;
+      }
+    } 
+
+    .opponent-cards,
+    .croupier-cards {
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      max-height: 15vh;
+    }
 
 .poker-table {
-  height: 60vh;
+  height: 50vh;
   background: green;
 }
 
   .table-cards {
-    margin-top: 15vh;
-    height: 30vh;
+    margin-top: 12.5vh;
+    height: 25vh;
   }
 
     .table-card {
@@ -132,7 +146,7 @@ img {
 
 .user {
   overflow: hidden;
-  height: 20vh;
+  height: 25vh;
 
   .fold {
     margin-top: 5px;
