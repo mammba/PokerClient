@@ -60,9 +60,6 @@ body {
   min-width: 100vw;
 }
 */
-.console {
-  height: 250px; }
-
 body {
   background: #333;
   color: #fff; }
@@ -128,6 +125,13 @@ img {
   height: 14vh;
   width: 10vh; }
 
+#table-stake {
+  height: 14vh;
+  margin-top: 11vh;
+  font-size: 10vh;
+  line-height: 14vh;
+  text-align: right; }
+
 .opponent {
   float: left; }
 
@@ -139,14 +143,40 @@ img {
     margin-top: 5px; }
 
 .user-avatar img {
-  max-width: 100%;
-  max-height: 100%; }
+  height: 14vh;
+  width: 14vh; }
+
+.user-cards {
+  padding: 5.5vh 0; }
+
+.user-card {
+  padding: 1vh; }
+  .user-card img {
+    height: 14vh;
+    width: 10vh; }
+
+.user-card:first-child {
+  text-align: right; }
+
+.user-card:last-child {
+  text-align: left; }
 
 .chat {
-  height: 50vh;
+  height: 98vh;
   background: #fff;
+  border-radius: 1vh;
+  padding: 2vh;
   color: #333;
   margin: 1vh; }
+
+.chat-header {
+  height: 7vh; }
+
+.chat-console {
+  height: 57vh; }
+
+.chat-controls {
+  height: 30vh; }
 
 /* ==========================================================================
    Media Queries
