@@ -19,15 +19,27 @@ var opponents = [];
 var firstPlayerId = null;
 var myPlayerId = null;
 var lastGameState = "waitForStart";
-$( document ).ready(function() {
+$(document).ready(function() {
 	
 	var socket =  io.connect('http://pokertest.cloudapp.net');
 
 	socket.on('connect', function() {
 		console.log('Connected'); 
 	});
+	
+	var croupierHtml = 
+			'<div class="seat croupier">\
+				<div class="croupier-avatar">\
+					<img src="http://placehold.it/200x200?text=Croupier">\
+				</div>\
+				<div class="croupier-cards row">\
+					<div class="croupier-card col-xs-6 col-xs-offset-3">\
+					<img src="/img/cards/back.png" id="croupier-card">\
+					</div>\
+				</div>\
+			</div>';
 
-	function addOpponent(index, opponent, tableCards) {
+	function addOpponent(index, opponent, data) {
 		// New player connected
 		if (index >= opponents.length) {
 			opponents[index] = opponent;
@@ -48,23 +60,13 @@ $( document ).ready(function() {
 					</div>\
 				</div>\
 			</div>';
-			var croupierHtml = 
-			'<div class="seat croupier">\
-				<div class="croupier-avatar">\
-					<img src="http://placehold.it/200x200?text=Croupier">\
-				</div>\
-				<div class="croupier-cards row">\
-					<div class="croupier-card col-xs-6 col-xs-offset-3">\
-					<img src="/img/cards/base.png" id="croupier-card">\
-					</div>\
-				</div>\
-			</div>';
-			if (opponent.id == firstPlayerId) {
+			
+			if (opponent.id == firstPlayerId && data.gameState == 'started') {
 				$("#opponent-seats").append(croupierHtml);
 			}
 			$("#opponent-seats").append(opponentHtml);
 			// Add croupier to the right if current user goes first
-			if (opponent.id == myPlayerId && index == opponents.length-1) {
+			if (opponent.id == myPlayerId && index == opponents.length-1 && data.gameState == 'started') {
 				$("#opponent-seats").append(croupierHtml);
 			}
 			var w = parseInt(100 / (opponents.length+1),10);
@@ -73,7 +75,7 @@ $( document ).ready(function() {
 		}
 		// Update player info
 		else {
-			if (tableCards == null || tableCards.length == 0) {
+			if (data.tableCards == null || data.tableCards.length == 0) {
 				$("#opponent-"+index+"-card-1").attr("src", "/img/cards/base.png");
 				$("#opponent-"+index+"-card-2").attr("src", "/img/cards/base.png");
 			}
@@ -98,6 +100,8 @@ $( document ).ready(function() {
 		// Table cards
 		var tableCards = data.data.tableCards;
 		if (tableCards != null) {
+			// Adding a deck to a table
+			$("#table-cards0").attr("src", "/img/cards/back.png");
 			for(var i = 0; i < tableCards.length; i++) {
 				var imgPath = "img/cards/"+tableCards[i].notation+".png";
 				var cardId = '#table-card'+(i+1);
@@ -109,13 +113,16 @@ $( document ).ready(function() {
 		// Players
 		var playerArray = data.data.players;
 		if (playerArray != null) {
+			$("#opponent-seats").html('');
+			if (data.data.gameState == 'waitForStart')
+				$("#opponent-seats").append(croupierHtml);
 			for(var i = 0; i < playerArray.length; i++) {
 				if (playerArray[i].id != data.data.playerID) {
-					addOpponent(i, playerArray[i], tableCards);
+					addOpponent(i, playerArray[i], data.data);
 					if (firstPlayerId == null && lastGameState == "waitForStart" && data.data.gameState == "started") {
 						firstPlayerId = playerArray[i].id;
 						lastGameState = "started";
-						$("#croupier-card").attr("src", "/img/cards/back.png");
+						$("#croupier-card").attr("src", "/img/cards/base.png");
 					}
 				}
 			}
