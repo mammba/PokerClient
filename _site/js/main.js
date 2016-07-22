@@ -221,7 +221,7 @@ $(document).ready(function() {
 				$("#call").removeClass("disabled").prop("disabled", false);
 			if(actionList[i] == "fold")
 				$("#fold").removeClass("disabled").prop("disabled", false);
-			if (actionList[i] == "pass")
+			if(actionList[i] == "pass")
 				$("#check").removeClass("disabled").prop("disabled", false);
 			if (actionList[i] == "raise") {
 				$("#raise").removeClass("disabled").prop("disabled", false);
@@ -242,7 +242,7 @@ $(document).ready(function() {
 			aMinStake = roundMaxStake;
 		}
 		// Winned ID's
-		if (data.data.winnerIDs != null && typeof data.data.winnerIDs !== undefined && winnerIDs.length != 0) {
+		if (data.data.winnerIDs != null && typeof data.data.winnerIDs !== undefined && data.data.winnerIDs.length != 0) {
 			var modalText = "";
 			if (data.data.winnerIDs.length == 1) {
 				// One winner
