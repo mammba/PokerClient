@@ -122,6 +122,10 @@ img {
       }
     }
 
+    .opponent-stake {
+      color: gold;
+    }
+
     .opponent-card:first-child {
       text-align: right;
     }
@@ -141,7 +145,7 @@ img {
     }
 
     .croupier-info {
-      color: yellow;
+      color: green;
     }
 
     .opponent-card,
@@ -182,6 +186,7 @@ img {
     font-size: 10vh;
     line-height: 14vh;
     text-align: right;
+    color: gold;
   }
 
 .opponent {
@@ -209,6 +214,11 @@ img {
     font-size: 2vh;
     line-height: 3.5vh;
   }
+
+    #user-stake, 
+    #user-balance {
+      color: gold;
+    }
 
   .user-cards {
     padding: 5.5vh 0;
