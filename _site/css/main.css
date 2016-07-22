@@ -60,19 +60,22 @@ body {
   min-width: 100vw;
 }
 */
-.console {
-  height: 250px; }
-
 body {
   background: #333;
+  background-image: url("/img/bg.jpg");
+  background-position: center;
+  background-size: cover;
   color: #fff; }
+
+.body-wrap {
+  background: rgba(0, 0, 0, 0.9); }
 
 img {
   max-width: 100%;
   height: auto; }
 
 .body-wrap {
-  font-family: 'Bitter', serif; }
+  font-family: 'Sancreek', cursive; }
 
 .seats {
   height: 30vh;
@@ -116,8 +119,10 @@ img {
 
 .poker-table {
   height: 40vh;
-  background: green;
-  border: 2vh solid brown;
+  background: #32A287;
+  background-image: url("/img/table-bg.png");
+  background-repeat: repeat;
+  border: 2vh solid #6C464E;
   border-radius: 20vh; }
 
 .table-cards {
@@ -128,6 +133,13 @@ img {
   height: 14vh;
   width: 10vh; }
 
+#table-stake {
+  height: 14vh;
+  margin-top: 11vh;
+  font-size: 10vh;
+  line-height: 14vh;
+  text-align: right; }
+
 .opponent {
   float: left; }
 
@@ -135,18 +147,59 @@ img {
   overflow: hidden;
   height: 30vh;
   padding: 1.5vh; }
-  .user .fold {
-    margin-top: 5px; }
 
-.user-avatar img {
-  max-width: 100%;
-  max-height: 100%; }
+.user-avatar {
+  padding: 6.5vh 0;
+  text-align: right; }
+  .user-avatar img {
+    height: 14vh;
+    width: 14vh; }
+
+.user-info {
+  padding: 6.5vh 0;
+  font-size: 2vh;
+  line-height: 3.5vh; }
+
+.user-cards {
+  padding: 5.5vh 0; }
+
+.user-card {
+  padding: 1vh; }
+  .user-card img {
+    height: 14vh;
+    width: 10vh; }
+
+.user-card:first-child {
+  text-align: right; }
+
+.user-card:last-child {
+  text-align: left; }
+
+.user-actions button,
+.user-actions input {
+  margin: 1.5vh 0;
+  height: 11.25vh;
+  font-size: 3.5vh; }
 
 .chat {
-  height: 50vh;
-  background: #fff;
+  height: 98vh;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 1vh;
+  padding: 2vh;
   color: #333;
-  margin: 1vh; }
+  margin: 1vh;
+  font-size: 2vh;
+  font-family: 'Bitter', serif; }
+
+.chat-header {
+  height: 7vh; }
+
+.chat-console {
+  height: 80vh; }
+
+.chat-controls input,
+.chat-controls button {
+  height: 7vh; }
 
 /* ==========================================================================
    Media Queries

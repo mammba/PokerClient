@@ -30,6 +30,54 @@ $(document).ready(function() {
 	socket.on('connect', function() {
 		console.log('Connected'); 
 	});
+
+
+	/* Chat */
+
+    socket.on('connect', function() {
+      output('<span class="connect-msg">Connected</span>');
+    });
+
+    socket.on('chatevent', function(data) {
+      output('<div class="message"><span class="username-msg"><span class="chat-username">' + data.userName + '</span>:</span> ' + data.message + '</div>');
+    });
+
+    socket.on('disconnect', function() {
+      output('<div class="message"><span class="disconnect-msg">Disconnected</span></div>');
+    });
+
+    function sendMessage() {
+			var userName = $('#user-nickname').text();
+            var message = $('#msg').val();
+            $('#msg').val('');
+
+            var jsonObject = {userName: userName,
+                      message: message};
+            socket.emit('chatevent', jsonObject);
+            console.log('Sent message:');
+            console.log(jsonObject);
+    }
+
+    function output(message) {
+            var currentTime = "<span class='time'>" +  moment().format('HH:mm') + "</span>";
+            var element = $("<div class='message'>" + currentTime + " " + message + "</div>");
+      $('#console').prepend(element);
+    	console.log('Received message:');
+    	console.log(message);
+    }
+
+    $('#send').click(function() {
+		sendMessage();
+	});
+
+    $(document).keyup(function(e){
+      if(e.keyCode == 13) {
+        $('#send').click();
+      }
+    });
+
+	/* End of Chat */
+
 	
 	var croupierHtml = 
 			'<div class="seat croupier">\
@@ -52,7 +100,7 @@ $(document).ready(function() {
 				<div class="row">\
 					<div class="col-xs-6">\
 						<div class="opponent-avatar">\
-							<img src="http://placehold.it/200x200?text=Opponent">\
+							<img src="http://www.avatarpro.biz/avatar/'+opponent.name+'?s=250">\
 						</div>\
 					</div>\
 					<div class="col-xs-6 opponent-info">\
@@ -70,7 +118,7 @@ $(document).ready(function() {
 					</div>\
 				</div>\
 			</div>';
-			
+
 			if (opponent.id == firstPlayerId && data.gameState == 'started') {
 				$("#opponent-seats").append(croupierHtml);
 			}
