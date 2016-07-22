@@ -37,7 +37,7 @@ $( document ).ready(function() {
     });
 
     socket.on('chatevent', function(data) {
-      output('<div class="message"><span class="username-msg">' + data.userName + ':</span> ' + data.message + '</div>');
+      output('<div class="message"><span class="username-msg"><span class="chat-username">' + data.userName + '</span>:</span> ' + data.message + '</div>');
     });
 
     socket.on('disconnect', function() {

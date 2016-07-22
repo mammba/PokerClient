@@ -92,7 +92,7 @@ img {
 }
 
 .body-wrap {
-  font-family: 'Bitter', serif; 
+  font-family: 'Sancreek', cursive;
 }
 
 .seats {
@@ -148,8 +148,10 @@ img {
 
 .poker-table {
   height: 40vh;
-  background: green;
-  border: 2vh solid brown;
+  background: #32A287;
+  background-image: url('/img/table-bg.png');
+  background-repeat: repeat;
+  border: 2vh solid #6C464E;
   border-radius: 20vh;
 }
 
@@ -236,6 +238,7 @@ img {
   color: #333;
   margin: 1vh;
   font-size: 2vh;
+  font-family: 'Bitter', serif;
 }
   .chat-header {
     height: 7vh;
