@@ -99,6 +99,9 @@ img {
     margin-left: auto;
     margin-right: auto; }
 
+.opponent-stake {
+  color: gold; }
+
 .opponent-card:first-child {
   text-align: right; }
 
@@ -114,7 +117,7 @@ img {
   padding: 1.5vh 0; }
 
 .croupier-info {
-  color: yellow; }
+  color: green; }
 
 .opponent-card,
 .croupier-card {
@@ -130,7 +133,7 @@ img {
   background-image: url("/img/table-bg.png");
   background-repeat: repeat;
   border: 2vh solid #6C464E;
-  border-radius: 20vh; }
+  border-radius: 25vh; }
 
 .table-cards {
   margin-top: 11vh;
@@ -145,7 +148,8 @@ img {
   margin-top: 11vh;
   font-size: 10vh;
   line-height: 14vh;
-  text-align: right; }
+  text-align: right;
+  color: gold; }
 
 .opponent {
   float: left; }
@@ -166,6 +170,10 @@ img {
   padding: 6.5vh 0;
   font-size: 2vh;
   line-height: 3.5vh; }
+
+#user-stake,
+#user-balance {
+  color: gold; }
 
 .user-cards {
   padding: 5.5vh 0; }
@@ -203,7 +211,10 @@ img {
 
 .chat-console {
   overflow-y: scroll;
-  height: 80vh; }
+  height: 78vh; }
+
+.chat-controls {
+  padding-top: 2vh; }
 
 .chat-controls input,
 .chat-controls button {
