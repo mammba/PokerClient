@@ -45,18 +45,20 @@ $( document ).ready(function() {
     function sendMessage() {
 			var userName = $('#user-nickname').text();
             var message = $('#msg').val();
-            $('#msg').val('');
+            if($('#msg').val() != "") {
+	            $('#msg').val('');
 
-            var jsonObject = {userName: userName,
-                      message: message};
-            socket.emit('chatevent', jsonObject);
-            console.log('Sent message:');
-            console.log(jsonObject);
+	            var jsonObject = {userName: userName,
+	                      message: message};
+	            socket.emit('chatevent', jsonObject);
+	            console.log('Sent message:');
+	            console.log(jsonObject);
+        	}
     }
 
     function output(message) {
             var currentTime = "<span class='time'>" +  moment().format('HH:mm') + "</span>";
-            var element = $("<div class='message'>" + currentTime + " " + message + "</div>");
+            var element = $("<div class='message'>" + message + "</div>");
       $('#console').prepend(element);
     	console.log('Received message:');
     	console.log(message);
@@ -280,9 +282,6 @@ $( document ).ready(function() {
 	});
 	$('#disconnect').click(function () {
 		sendDisconnect();
-	});
-	$('#send').click(function() {
-		sendMessage();
 	});
 
 });
