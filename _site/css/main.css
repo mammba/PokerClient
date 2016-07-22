@@ -105,9 +105,16 @@ img {
 .opponent-card:last-child {
   text-align: left; }
 
-.opponent-info {
+.croupier-card {
+  text-align: center; }
+
+.opponent-info,
+.croupier-info {
   text-align: left;
   padding: 1.5vh 0; }
+
+.croupier-info {
+  color: yellow; }
 
 .opponent-card,
 .croupier-card {
