@@ -101,7 +101,6 @@ img {
   overflow: hidden;
 }
   .seat {
-    // padding: 1.5vh 0;
     width: 20%;
     float: left;
 
@@ -131,9 +130,18 @@ img {
       text-align: left;
     }
 
-    .opponent-info {
+    .croupier-card {
+      text-align: center;
+    }
+
+    .opponent-info,
+    .croupier-info {
       text-align: left;
       padding: 1.5vh 0;
+    }
+
+    .croupier-info {
+      color: yellow;
     }
 
     .opponent-card,

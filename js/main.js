@@ -23,6 +23,8 @@ var playerBalance = 0;
 var aMinStake = 100;
 var aMinCoeff = 2;
 var roundMaxStake = 0;
+
+
 $(document).ready(function() {
 	
 	var socket =  io.connect('http://pokertest.cloudapp.net');
@@ -63,7 +65,7 @@ $(document).ready(function() {
     function output(message) {
             var currentTime = "<span class='time'>" +  moment().format('HH:mm') + "</span>";
             var element = $("<div class='message'>" + message + "</div>");
-      $('#console').prepend(element);
+      $('#console').append(element);
     	console.log('Received message:');
     	console.log(message);
     }
@@ -83,12 +85,19 @@ $(document).ready(function() {
 	
 	var croupierHtml = 
 			'<div class="seat croupier">\
-				<div class="croupier-avatar">\
-					<img src="http://placehold.it/200x200?text=Croupier">\
+				<div class="row">\
+					<div class="col-xs-6">\
+						<div class="croupier-avatar">\
+							<img src="http://www.avatarpro.biz/avatar/blah?s=250">\
+						</div>\
+					</div>\
+					<div class="cols-xs-6 croupier-info">\
+						<div class"croupier-nickname">Croupier</div>\
+					</div>\
 				</div>\
-				<div class="croupier-cards row">\
+				<div class="row croupier-cards">\
 					<div class="croupier-card col-xs-6 col-xs-offset-3">\
-					<img src="/img/cards/back.png" id="croupier-card">\
+						<img src="/img/cards/back.png" id="croupier-card">\
 					</div>\
 				</div>\
 			</div>';
@@ -187,9 +196,9 @@ $(document).ready(function() {
 						$("#user-card2").attr("src", "img/cards/"+playerArray[i].cards[1].notation+".png");
 					}
 					playerBalance = playerArray[i].balance;
-					$("#user-nickname").val(playerArray[i].name);
-					$("#user-stake").val(playerArray[i].stake);
-					$("#user-state").val((playerArray[i].state == "waitForMove"?"I'm making a turn":""));
+					$("#user-nickname").text(playerArray[i].name);
+					$("#user-stake").text(playerArray[i].stake);
+					$("#user-state").text((playerArray[i].state == "waitForMove"?"I'm making a turn":""));
 				}
 				if (firstPlayerId == null && lastGameState == "waitForStart" && data.data.gameState == "started") {
 					firstPlayerId = playerArray[i].id;
@@ -223,7 +232,7 @@ $(document).ready(function() {
 		if (typeof data.data.minCoeff !== undefined && data.data.minCoeff != null)
 			aMinCoeff = data.data.minCoeff;
 		if (typeof data.data.overallStakes !== undefined && data.data.overallStakes != null)
-			$("#table-stake").val(data.data.overallStakes);
+			$("#table-stake").text(data.data.overallStakes);
 		if (typeof data.data.roundMaxStake !== undefined && data.data.roundMaxStake != null) {
 			roundMaxStake = data.data.roundMaxStake;
 			if (roundMaxStake != 0)
