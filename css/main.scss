@@ -160,7 +160,7 @@ img {
   background-image: url('/img/table-bg.png');
   background-repeat: repeat;
   border: 2vh solid #6C464E;
-  border-radius: 20vh;
+  border-radius: 25vh;
 }
 
   .table-cards {
@@ -254,7 +254,11 @@ img {
 
   .chat-console {
     overflow-y: scroll;
-    height: 80vh;
+    height: 78vh;
+  }
+
+  .chat-controls {
+    padding-top: 2vh;
   }
 
   .chat-controls input,

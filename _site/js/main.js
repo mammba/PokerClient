@@ -179,6 +179,8 @@ $(document).ready(function() {
 				}
 			}
 		}
+		// Table stake
+		$("#table-stake").text(data.data.overallStakes);
 		// Players
 		var playerArray = data.data.players;
 		if (playerArray != null) {
@@ -196,8 +198,9 @@ $(document).ready(function() {
 						$("#user-card2").attr("src", "img/cards/"+playerArray[i].cards[1].notation+".png");
 					}
 					playerBalance = playerArray[i].balance;
+					$("#user-balance").text("Balance: "+playerBalance);
 					$("#user-nickname").text(playerArray[i].name);
-					$("#user-stake").text(playerArray[i].stake);
+					$("#user-stake").text("Stake: "+playerArray[i].stake);
 					$("#user-state").text((playerArray[i].state == "waitForMove"?"I'm making a turn":""));
 				}
 				if (firstPlayerId == null && lastGameState == "waitForStart" && data.data.gameState == "started") {
