@@ -224,7 +224,7 @@ $(document).ready(function() {
 			if (actionList[i] == "pass")
 				$("#check").removeClass("disabled").prop("disabled", false);
 			if (actionList[i] == "raise") {
-				$("#call").removeClass("disabled").prop("disabled", false);
+				$("#raise").removeClass("disabled").prop("disabled", false);
 				$("#bet").removeClass("disabled").prop("disabled", false);
 			}
 		}
