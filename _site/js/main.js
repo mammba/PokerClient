@@ -30,8 +30,6 @@ $( document ).ready(function() {
 
 	/* Chat */
 
-	var userName = $('#user-nickname').val();
-
     socket.on('connect', function() {
       output('<span class="connect-msg">Connected</span>');
     });
@@ -45,21 +43,30 @@ $( document ).ready(function() {
     });
 
     function sendMessage() {
+			var userName = $('#user-nickname').text();
             var message = $('#msg').val();
             $('#msg').val('');
 
             var jsonObject = {userName: userName,
                       message: message};
             socket.emit('chatevent', jsonObject);
+            console.log('Sent message:');
+            console.log(jsonObject);
     }
 
     function output(message) {
             var currentTime = "<span class='time'>" +  moment().format('HH:mm') + "</span>";
             var element = $("<div class='message'>" + currentTime + " " + message + "</div>");
       $('#console').prepend(element);
+    	console.log('Received message:');
+    	console.log(message);
     }
 
-    $(document).keydown(function(e){
+    $('#send').click(function() {
+		sendMessage();
+	});
+
+    $(document).keyup(function(e){
       if(e.keyCode == 13) {
         $('#send').click();
       }
