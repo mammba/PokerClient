@@ -37,11 +37,11 @@ $( document ).ready(function() {
     });
 
     socket.on('chatevent', function(data) {
-      output('<div class="message"><span class="username-msg">' + data.userName + ':</span> ' + data.message+ '</div>');
+      output('<div class="message"><span class="username-msg">' + data.userName + ':</span> ' + data.message + '</div>');
     });
 
     socket.on('disconnect', function() {
-      output('<span class="disconnect-msg">Disconnected</span>');
+      output('<div class="message"><span class="disconnect-msg">Disconnected</span></div>');
     });
 
     function sendMessage() {
