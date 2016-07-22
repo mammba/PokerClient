@@ -26,6 +26,47 @@ $( document ).ready(function() {
 	socket.on('connect', function() {
 		console.log('Connected'); 
 	});
+
+
+	/* Chat */
+
+	var userName = $('#user-nickname').val();
+
+    socket.on('connect', function() {
+      output('<span class="connect-msg">Connected</span>');
+    });
+
+    socket.on('chatevent', function(data) {
+      output('<div class="message"><span class="username-msg">' + data.userName + ':</span> ' + data.message + '</div>');
+    });
+
+    socket.on('disconnect', function() {
+      output('<div class="message"><span class="disconnect-msg">Disconnected</span></div>');
+    });
+
+    function sendMessage() {
+            var message = $('#msg').val();
+            $('#msg').val('');
+
+            var jsonObject = {userName: userName,
+                      message: message};
+            socket.emit('chatevent', jsonObject);
+    }
+
+    function output(message) {
+            var currentTime = "<span class='time'>" +  moment().format('HH:mm') + "</span>";
+            var element = $("<div class='message'>" + currentTime + " " + message + "</div>");
+      $('#console').prepend(element);
+    }
+
+    $(document).keydown(function(e){
+      if(e.keyCode == 13) {
+        $('#send').click();
+      }
+    });
+
+	/* End of Chat */
+
 	
 	function addOpponent(index, opponent, tableCards) {
 		// New player connected
