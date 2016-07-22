@@ -202,6 +202,7 @@ img {
   height: 7vh; }
 
 .chat-console {
+  overflow-y: scroll;
   height: 80vh; }
 
 .chat-controls input,
