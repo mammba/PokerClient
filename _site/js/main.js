@@ -19,6 +19,10 @@ var opponents = [];
 var firstPlayerId = null;
 var myPlayerId = null;
 var lastGameState = "waitForStart";
+var playerBalance = 0;
+var aMinStake = 100;
+var aMinCoeff = 2;
+var roundMaxStake = 0;
 $(document).ready(function() {
 	
 	var socket =  io.connect('http://pokertest.cloudapp.net');
@@ -41,7 +45,7 @@ $(document).ready(function() {
 
 	function addOpponent(index, opponent, data) {
 		// New player connected
-		if (index >= opponents.length) {
+		//if (index >= opponents.length) {
 			opponents[index] = opponent;
 			var opponentHtml = 
 			'<div class="seat opponent">\
@@ -78,10 +82,10 @@ $(document).ready(function() {
 			var w = parseInt(100 / (opponents.length+1),10);
 			// Don't mix CSS and HTML please.
 			$('.seat').css("width", w+"%");
-		}
+		/*}
 		// Update player info
-		else {
-			if (data.tableCards == null || data.tableCards.length == 0) {
+		else {*/
+			if (data.gameState == "waitForStart") {
 				$("#opponent-"+index+"-card-1").attr("src", "/img/cards/base.png");
 				$("#opponent-"+index+"-card-2").attr("src", "/img/cards/base.png");
 			}
@@ -94,10 +98,10 @@ $(document).ready(function() {
 				$("#opponent-"+index+"-card-2").attr("src", "/img/cards/"+opponent.cards[1]+".png")
 			}
 			
-			$("#opponent-"+index+"-nickname").text(opponent.name);
+			/*$("#opponent-"+index+"-nickname").text(opponent.name);
 			$("#opponent-"+index+"-stake").text(opponent.stake);
 			$("#opponent-"+index+"-state").text(((opponent.state == "waitForMove")?"Thinking...":""));
-		}
+		}*/
 	}
 	
 	function updateTable(data) {
@@ -125,11 +129,22 @@ $(document).ready(function() {
 			for(var i = 0; i < playerArray.length; i++) {
 				if (playerArray[i].id != data.data.playerID) {
 					addOpponent(i, playerArray[i], data.data);
-					if (firstPlayerId == null && lastGameState == "waitForStart" && data.data.gameState == "started") {
-						firstPlayerId = playerArray[i].id;
-						lastGameState = "started";
-						$("#croupier-card").attr("src", "/img/cards/base.png");
+				}
+				else {
+					// Add player's cards
+					if (playerArray[i].cards != null && playerArray[i].cards.length !=0) {
+						$("#user-card1").attr("src", "img/cards/"+playerArray[i].cards[0].notation+".png");
+						$("#user-card2").attr("src", "img/cards/"+playerArray[i].cards[1].notation+".png");
 					}
+					playerBalance = playerArray[i].balance;
+					$("#user-nickname").val(playerArray[i].name);
+					$("#user-stake").val(playerArray[i].stake);
+					$("#user-state").val((playerArray[i].state == "waitForMove"?"I'm making a turn":""));
+				}
+				if (firstPlayerId == null && lastGameState == "waitForStart" && data.data.gameState == "started") {
+					firstPlayerId = playerArray[i].id;
+					lastGameState = "started";
+					$("#croupier-card").attr("src", "/img/cards/base.png");
 				}
 			}
 		}
@@ -152,6 +167,58 @@ $(document).ready(function() {
 			else if (actionList[i] == "bet")
 				$("#bet").addClass("disabled").prop("disabled", false);
 		}
+		// Min stake
+		if (typeof data.data.minStake !== undefined && data.data.minStake != null)
+			aMinStake = data.data.minStake;
+		if (typeof data.data.minCoeff !== undefined && data.data.minCoeff != null)
+			aMinCoeff = data.data.minCoeff;
+		if (typeof data.data.overallStakes !== undefined && data.data.overallStakes != null)
+			$("#table-stake").val(data.data.overallStakes);
+		if (typeof data.data.roundMaxStake !== undefined && data.data.roundMaxStake != null) {
+			roundMaxStake = data.data.roundMaxStake;
+			if (roundMaxStake != 0)
+				$("#check").addClass("disabled").prop("disabled", true);
+			aMinStake = roundMaxStake;
+		}
+		// Winned ID's
+		if (data.data.winnerIDs != null && typeof data.data.winnerIDs !== undefined && winnerIDs.length != 0) {
+			var modalText = "";
+			if (data.data.winnerIDs.length == 1) {
+				// One winner
+				if (data.data.winnerIDs[0] == data.data.playerID)
+					modalText = 'You won!';
+				else {
+					for(var i = 0; i < playerArray.length; i++) {
+						if (playerArray[i].id == data.data.winnerIDs[0]) {
+							playerName = playerArray[i].name;
+							break;
+						}
+					}
+					modalText = "Player '"+playerName+"' had won!<br>";
+				}
+				modalText += data.data.overallStakes+" Innopoints!";
+			}
+			else {
+				// Several winners
+				modalText = "Winners are: ";
+				var hadBefore = false;
+				for(var i = 0; i < playerArray.length; i++) {
+					for(var j = 0; j < data.data.winnerIDs.length; j++) {
+						if (playerArray[i].id == data.data.winnerIDs[j]) {
+							if (hadBefore)
+								modalText += ", ";
+							modalText += playerArray[i].name;
+							hadBefore = true;
+							break;
+						}
+					}
+				}
+				modalText += "!<br>";
+				modalText += Math.floor(data.data.overallStakes/data.data.winnerIDs.length)+" Innopoints!";
+			}
+			$("#modalText").html(modalText);
+			$("#winnersModal").modal('show');
+		}
 	}
 	
 	socket.on('su', function(data) {
@@ -162,11 +229,7 @@ $(document).ready(function() {
 		if (data.data.dataType == "TABLE_STATE")
 			updateTable(data);
 	});
-
-	var aStake = $('#user-stake').val();
-	var aMinStake = 100;
-	var aMinCoeff = 2;
-
+	
 	function logSentToConsole(data) {
 		console.log("Sent:");
 		console.log(data);
@@ -174,12 +237,11 @@ $(document).ready(function() {
 
 	function sendCheck() {
 		var anAction = "check";
-		aStake = 0;
 		var aJsonObject = {
 			action: "su",
 			data: {
 			action: anAction,
-			stake: aStake
+			stake: 0
 			}
 		};
 		socket.emit('su', aJsonObject);
@@ -188,12 +250,11 @@ $(document).ready(function() {
 
 	function sendCall() {
 		var anAction = "call";
-		aStake = aMinStake;
 		var aJsonObject = {
 			action: "su",
 			data: {
 			action: anAction,
-			stake: aStake
+			stake: aMinStake
 			}
 		};
 		socket.emit('su', aJsonObject);
@@ -201,8 +262,10 @@ $(document).ready(function() {
 	}
 
 	function sendBet() {
-		var anAction = "bet";
-		aStake = aMinStake * aMinCoeff;
+		var anAction = "raise";
+		var aStake = aMinStake * aMinCoeff;
+		if (playerBalance < aStake)
+			aStake = playerBalance;
 		var aJsonObject = {
 			action: "su",
 			data: {
@@ -216,6 +279,13 @@ $(document).ready(function() {
 
 	function sendRaise() {
 		var anAction = "raise";
+		if ($("#input-stake").val() < aMinStake * aMinCoeff) {
+			$("#input-stake").val(aMinStake * aMinCoeff+1);
+			return;
+		}
+		var aStake = $("#input-stake").val();
+		if (playerBalance < aStake)
+			aStake = playerBalance;
 		var aJsonObject = {
 			action: "su",
 			data: {
@@ -229,12 +299,11 @@ $(document).ready(function() {
 
 	function sendFold() {
 		var anAction = "fold";
-		aStake = 0;
 		var aJsonObject = {
 			action: "su",
 			data: {
 			action: anAction,
-			stake: aStake
+			stake: 0
 			}
 		};
 		socket.emit('su', aJsonObject);
