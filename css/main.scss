@@ -75,8 +75,15 @@ body {
 */
 
 body {
-  background: #333;
+  background: #333; 
+  background-image: url('/img/bg.jpg');
+  background-position: center;
+  background-size: cover;
   color: #fff;
+}
+
+.body-wrap {
+  background: rgba(0, 0, 0, 0.9)
 }
 
 img {
@@ -223,7 +230,7 @@ img {
 
 .chat {
   height: 98vh;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 1vh;
   padding: 2vh;
   color: #333;
@@ -241,14 +248,6 @@ img {
   .chat-controls button {
     height: 7vh;
   }
-
-
-
-
-
-
-
-
 
 
 /* ==========================================================================
