@@ -139,12 +139,18 @@ img {
   overflow: hidden;
   height: 30vh;
   padding: 1.5vh; }
-  .user .fold {
-    margin-top: 5px; }
 
-.user-avatar img {
-  height: 14vh;
-  width: 14vh; }
+.user-avatar {
+  padding: 6.5vh 0;
+  text-align: right; }
+  .user-avatar img {
+    height: 14vh;
+    width: 14vh; }
+
+.user-info {
+  padding: 6.5vh 0;
+  font-size: 2vh;
+  line-height: 3.5vh; }
 
 .user-cards {
   padding: 5.5vh 0; }
@@ -161,6 +167,12 @@ img {
 .user-card:last-child {
   text-align: left; }
 
+.user-actions button,
+.user-actions input {
+  margin: 1.5vh 0;
+  height: 11.25vh;
+  font-size: 3.5vh; }
+
 .chat {
   height: 98vh;
   background: #fff;
@@ -173,10 +185,11 @@ img {
   height: 7vh; }
 
 .chat-console {
-  height: 57vh; }
+  height: 80vh; }
 
-.chat-controls {
-  height: 30vh; }
+.chat-controls input,
+.chat-controls button {
+  height: 7vh; }
 
 /* ==========================================================================
    Media Queries
