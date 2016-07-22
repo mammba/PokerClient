@@ -153,8 +153,8 @@ $(document).ready(function() {
 				$("#opponent-"+index+"-card-2").attr("src", "/img/cards/back.png");
 			}
 			else {
-				$("#opponent-"+index+"-card-1").attr("src", "/img/cards/"+opponent.cards[0]+".png")
-				$("#opponent-"+index+"-card-2").attr("src", "/img/cards/"+opponent.cards[1]+".png")
+				$("#opponent-"+index+"-card-1").attr("src", "/img/cards/"+opponent.cards[0].notation+".png")
+				$("#opponent-"+index+"-card-2").attr("src", "/img/cards/"+opponent.cards[1].notation+".png")
 			}
 			
 			/*$("#opponent-"+index+"-nickname").text(opponent.name);
@@ -170,7 +170,7 @@ $(document).ready(function() {
 		var tableCards = data.data.tableCards;
 		if (tableCards != null) {
 			// Adding a deck to a table
-			$("#table-cards0").attr("src", "/img/cards/back.png");
+			$("#table-card0").attr("src", "/img/cards/back.png");
 			for(var i = 0; i < tableCards.length; i++) {
 				var imgPath = "img/cards/"+tableCards[i].notation+".png";
 				var cardId = '#table-card'+(i+1);
@@ -204,6 +204,7 @@ $(document).ready(function() {
 					firstPlayerId = playerArray[i].id;
 					lastGameState = "started";
 					$("#croupier-card").attr("src", "/img/cards/base.png");
+					$("#table-card0").attr("src", "/img/cards/back.png");
 				}
 			}
 		}
@@ -214,17 +215,18 @@ $(document).ready(function() {
 		$("#bet").addClass("disabled").prop("disabled", true);
 		$("#fold").addClass("disabled").prop("disabled", true)
 		$("#check").addClass("disabled").prop("disabled", true);
+		console.log(actionList);
 		for (var i = 0; i < actionList.length; i++) {
 			if (actionList[i] == "call")
 				$("#call").removeClass("disabled").prop("disabled", false);
-			else if(actionList[i] == "fold")
-				$("#fold").addClass("disabled").prop("disabled", false);
-			else if (actionList[i] == "pass")
-				$("#check").addClass("disabled").prop("disabled", false);
-			else if (actionList[i] == "raise")
-				$("#call").addClass("disabled").prop("disabled", false);
-			else if (actionList[i] == "bet")
-				$("#bet").addClass("disabled").prop("disabled", false);
+			if(actionList[i] == "fold")
+				$("#fold").removeClass("disabled").prop("disabled", false);
+			if (actionList[i] == "pass")
+				$("#check").removeClass("disabled").prop("disabled", false);
+			if (actionList[i] == "raise") {
+				$("#call").removeClass("disabled").prop("disabled", false);
+				$("#bet").removeClass("disabled").prop("disabled", false);
+			}
 		}
 		// Min stake
 		if (typeof data.data.minStake !== undefined && data.data.minStake != null)
