@@ -213,15 +213,15 @@ $(document).ready(function() {
 		}
 		// Buttons
 		var actionList = data.data.actionList;
-		$("#call").addClass("disabled").prop("disabled", true);
+		//$("#call").addClass("disabled").prop("disabled", true);
 		$("#raise").addClass("disabled").prop("disabled", true);
 		$("#bet").addClass("disabled").prop("disabled", true);
 		$("#fold").addClass("disabled").prop("disabled", true)
 		$("#check").addClass("disabled").prop("disabled", true);
 		console.log(actionList);
 		for (var i = 0; i < actionList.length; i++) {
-			if (actionList[i] == "call")
-				$("#call").removeClass("disabled").prop("disabled", false);
+			//if (actionList[i] == "call")
+			//	$("#call").removeClass("disabled").prop("disabled", false);
 			if(actionList[i] == "fold")
 				$("#fold").removeClass("disabled").prop("disabled", false);
 			if(actionList[i] == "pass")
@@ -240,8 +240,8 @@ $(document).ready(function() {
 			$("#table-stake").text(data.data.overallStakes);
 		if (typeof data.data.roundMaxStake !== undefined && data.data.roundMaxStake != null) {
 			roundMaxStake = data.data.roundMaxStake;
-			if (roundMaxStake != 0)
-				$("#check").addClass("disabled").prop("disabled", true);
+			//if (roundMaxStake != 0)
+			//	$("#check").addClass("disabled").prop("disabled", true);
 			aMinStake = roundMaxStake;
 		}
 		// Winned ID's
@@ -345,7 +345,7 @@ $(document).ready(function() {
 		var anAction = "raise";
 		if ($("#input-stake").val() < aMinStake * aMinCoeff) {
 			$("#input-stake").val(aMinStake * aMinCoeff+1);
-			return;
+			//return;
 		}
 		var aStake = $("#input-stake").val();
 		if (playerBalance < aStake)
